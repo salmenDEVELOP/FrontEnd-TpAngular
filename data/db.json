@@ -1,0 +1,28 @@
+{
+  "produits": [
+    {
+      "id": "8",
+      "code": "ddd",
+      "designation": "dddjjj",
+      "prix": "22"
+    },
+    {
+      "id": "666",
+      "code": "kkkkssssss",
+      "designation": "jjjj",
+      "prix": "823"
+    },
+    {
+      "id": "5",
+      "code": "a89",
+      "designation": "chaise",
+      "prix": "3000"
+    },
+    {
+      "id": "88888",
+      "code": "az33",
+      "designation": "chaise",
+      "prix": "230"
+    }
+  ]
+}

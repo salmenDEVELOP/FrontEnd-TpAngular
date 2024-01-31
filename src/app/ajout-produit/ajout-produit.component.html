@@ -1,0 +1,57 @@
+<div class="container" style="display: flex;">
+    <div>
+    <h1> Fiche Produit </h1>
+    <form #produitForm="ngForm" (ngSubmit)="validerFormulaire(produitForm)">
+        <table>
+            <tr>
+                <td> Code: </td>
+                <td> <input type ="text" name="code" [(ngModel)]="nouveauProduit.code"/> </td>
+            </tr>
+            <tr>
+                <td> Désignation: </td>
+                <td> <input type ="text" name="designation" [(ngModel)]="nouveauProduit.designation"/> </td>
+            </tr>
+            <tr>
+                <td> Categorie: </td>
+                <td >    <select style="width: 188px;" name="categorie" [(ngModel)]="nouveauProduit.categorie">
+                            <option *ngFor="let c of categories" [ngValue]="c">{{c.libelle}}</option>
+                            
+                        </select> 
+                </td>  
+            </tr>
+            <tr>
+                <td> Prix: </td>
+                <td> <input type ="text" name="prix" [(ngModel)]="nouveauProduit.prix"/> </td>
+            </tr>
+            <tr>
+                <td [align]="'center'" colspan="2"> 
+                    <input type="submit" value="Valider" [disabled]="!produitForm.form.valid" class="btn btn-secondary"/> 
+                    <button type="button" (click)="produitForm.reset()" class="btn btn-secondary">Effacer</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+    <div style="margin-top: 85px; margin-left: 50px;" [hidden]="false">
+        <h5> ajouter catégorie : </h5>
+        <form #categorieForm="ngForm" (ngSubmit)="validerFormulaireCategorie(categorieForm)">
+            <table>
+                <tr>
+                    <td> Code: </td>
+                    <td> <input type ="text" name="code" [(ngModel)]="nouvelleCategorie.code"/> </td>
+                </tr>
+                <tr>
+                    <td> Libellé: </td>
+                    <td> <input type ="text" name="libelle" [(ngModel)]="nouvelleCategorie.libelle"/> </td>
+                </tr>
+                <tr>
+                    <td [align]="'center'" colspan="2"> 
+                        <input type="submit" value="Valider" [disabled]="!categorieForm.form.valid" class="btn btn-secondary"/> 
+                        <button type="button" (click)="categorieForm.reset()" class="btn btn-secondary">Effacer</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+</div>

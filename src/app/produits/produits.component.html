@@ -1,0 +1,84 @@
+<div [hidden]="!affficheFicheProduit" class="container">
+    <h1> Fiche Produit </h1>
+    <form #produitForm="ngForm" (ngSubmit)="validerFormulaire(produitForm)">
+        <table>
+            <tr hidden>
+                <td> Id: </td>
+                <td> <input id="id" name="id" type="text" [(ngModel)]="produitCourant.id" readonly  /> </td>
+            </tr>
+            <tr>
+                <td> Code: </td>
+                <td> <input type ="text" name="code" [(ngModel)]="produitCourant.code"/> </td>
+            </tr>
+            <tr>
+                <td> Désignation: </td>
+                <td> <input type ="text" name="designation" [(ngModel)]="produitCourant.designation"/> </td>
+            </tr>
+            <tr>
+                <td> Categorie: </td>
+                <td>    <select name="categorie" [(ngModel)]="produitCourant.categorie">
+                            <option *ngFor="let c of categories" [ngValue]="c">{{c.libelle}}</option>
+                            <option >Ajouter catégorie</option>
+                        </select> </td>
+            </tr>
+            <tr>
+                <td> Prix: </td>
+                <td> <input type ="text" name="prix" [(ngModel)]="produitCourant.prix"/> </td>
+            </tr>
+            <tr>
+                <td hidden> <input type ="text" name="stocks" [(ngModel)]="produitCourant.stocks"/> </td>
+                <td hidden> <input type ="text" name="enPromotion" [(ngModel)]="produitCourant.enPromotion"/> </td>
+                <td hidden> <input type ="text" name="dateAchat" [(ngModel)]="produitCourant.dateAchat"/> </td>
+                <td hidden> <input type ="text" name="quantite" [(ngModel)]="produitCourant.quantite"/> </td>
+            </tr>
+            <tr>
+                <td [align]="'center'" colspan="2"> 
+                    <input type="submit" value="Valider" [disabled]="!produitForm.form.valid" class="btn btn-secondary"/> 
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<div class="container">
+    
+    <h1> liste des produits </h1>
+    <div>
+        <h5>rechercher un produit par :</h5>
+        <span>
+            <label for="">Categorie :</label>
+            <select name="categorie" [(ngModel)]="filtreCategorie" (change)="evaluerCritere()">
+                <option *ngFor="let c of categories" [ngValue]="c">{{c.libelle}}</option>  
+            </select>
+        </span>
+        <span style="margin-left: 20px;"> 
+            <label>Prix > à :</label>
+            <input type="number" [(ngModel)]="filtrePrix" min="0" (input)="evaluerCritere()">
+        </span>
+        <span>
+            <button style="margin-left: 20px;" (click)="vider()" >Vider</button>
+        </span>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th> Id </th>
+                <th>Code</th>
+                <th>Designation</th>
+                <th>Categorie</th>
+                <th>Prix</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of produits">
+                <td > {{p.id}}</td>
+                <td> {{p.code}}</td>
+                <td> {{p.designation}}</td>
+                <td>{{p.categorie?.libelle}}</td>
+                <td> {{p.prix}}</td>
+                <td> <button (click)="produitForm.setValue(p) ;affficheFicheProduit=true" class="btn btn-dark"><i class="bi bi-pen"></i> Editer </button> </td>
+                <td> <button (click)="supprimerProduit(p)" class="btn btn-danger"><i class="bi bi-trash"></i>  Supprimer </button> </td> 
+            </tr>
+        </tbody>
+    </table>
+</div>
